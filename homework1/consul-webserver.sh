@@ -44,12 +44,11 @@ tee /etc/consul.d/config.json > /dev/null <<EOF
   "retry_join": ["provider=aws tag_key=consul_server tag_value=true"],
   "enable_script_checks": true,
   "server": false,
-  "bootstrap_expect": 1,
-  "ui": true,
   "service":
-  {"name": "webserver",
-  "tags": ["Apache"],
-  "port": 80,
+  {
+    "name": "webserver",
+    "tags": ["Apache"],
+    "port": 8500,
     "check": {
        "args": ["curl", "localhost"],
        "interval": "10s"
@@ -93,4 +92,3 @@ systemctl start consul.service
 apt-get install apache2 -y
 systemctl enable apache2
 systemctl start apache2
-chmod 777 /var/www/html/index.html
